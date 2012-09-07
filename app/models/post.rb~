@@ -1,0 +1,4 @@
+class Post < ActiveRecord::Base
+  attr_accessible :body, :title
+  paginates_per 5
+end
