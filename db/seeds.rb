@@ -6,11 +6,18 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 10.times do
-  Post.create(
+  @post=Post.create(
     title: Faker::Company.name,
     pic: File.open(Rails.root.join("public/sample.jpg")),
     author: Faker::Company.name,
     body: Faker::Lorem.paragraph
   )
+  10.times do  
+    Comment.create(
+      author: Faker::Company.name,
+      body: Faker::Lorem.paragraph,
+      post_id: @post.id
+    )
+  end
 end
 

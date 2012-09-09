@@ -3,13 +3,13 @@
 <hr/>
 
 
-<%= form_tag('/posts', :method => :get) do %>
+<%= form_tag('/posts', :method => :get, :class => 'well') do %>
 
 <div class="field">
     <%= label_tag :search %><br />
     <%= text_field_tag :search %>
   </div>
-  <%= submit_tag "search" %>
+  <%= submit_tag "search", :class => 'btn btn-primary'%>
   
   <% end %>
 
