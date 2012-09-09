@@ -5,7 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-20.times do
-  Post.create(title: Faker::Company.name, body: Faker::Lorem.paragraph)
+10.times do
+  Post.create(
+    title: Faker::Company.name,
+    pic: File.open(Rails.root.join("public/sample.jpg")),
+    author: Faker::Company.name,
+    body: Faker::Lorem.paragraph
+  )
 end
 
