@@ -1,8 +1,10 @@
 class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
-  def index
-    @posts = Post.order("created_at DESC").page(params[:page]).per(5)
+  def index    
+     @posts = Post.scoped
+     @posts = @posts.where('title like ? or body like ?', "%" + params[:search] + "%", "%#{params[:search]}%") if params[:search].present?
+     @posts = @posts.order("created_at DESC").page(params[:page]).per(5)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +16,9 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments
+    @comment = Comment.new  
+    @comment.post_id=@post.id
 
     respond_to do |format|
       format.html # show.html.erb

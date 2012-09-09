@@ -1,39 +1,3 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Title:</b>
-  <%= @post.title %>
-</p>
-<p>
-  <b>Author:</b>
-  <%= @post.author %>
-</p>
-
-<p>
-  <b>Body:</b>
-  <p>
-  <%= image_tag @post.pic.url :medium %>
-  </p>
-  <%= @post.body %>
-</p>
-
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
-
-
-
-
-<h1>Listing comments</h1>
-<ul>
-<% @comments.each do |comment| %>
-  <li>
-    <%= comment.author %>
-    <%= comment.body %>
-   </li>
-<% end %>
-</ul>
-
 <%= form_for(@comment) do |f| %>
   <% if @comment.errors.any? %>
     <div id="error_explanation">
@@ -55,12 +19,11 @@
     <%= f.label :body %><br />
     <%= f.text_area :body %>
   </div>
- 
-
-    <%= f.hidden_field :post_id %>
-
+  <div class="field">
+    <%= f.label :post_id %><br />
+    <%= f.number_field :post_id %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
-
