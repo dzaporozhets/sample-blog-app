@@ -1,16 +1,30 @@
 <h1>Rails Sample Blog</h1>
-<%= link_to 'New Post', new_post_path, class: 'btn' %>
+  <% if user_signed_in? %>
+  <%= link_to 'New Post', new_post_path, class: 'btn'%>
+  <% else %>
+  You need to be signed in to create or edit posts.
+  <% end %>
 <hr/>
 
+ <div id=user_nav, class="btn-group", style="float:right">
+  <% if user_signed_in? %>
+    Signed in as <%= current_user.email %>. Not you?
+    <%= link_to "Sign out", destroy_user_session_path, :method => :delete, class: 'btn' %>
+  <% else %>
+    <%= link_to "Sign in", new_user_session_path, :method => :post, class: 'btn' %> 
+    <%= link_to "Sign up", new_user_registration_path, :method => :GET, class: 'btn' %>
+  <% end %>
+</div>
 
 <%= form_tag('/posts', :method => :get, :class => 'well') do %>
 
-<div class="field">
-    <%= label_tag :search %><br />
-    <%= text_field_tag :search %>
-  </div>
-  <%= submit_tag "search", :class => 'btn btn-primary'%>
+  <div class="btn-group">
+        <%= label_tag :search %></br>
+    <%= text_field_tag :search %> 
+    <%= submit_tag "search", :class => 'btn'%>
   
+  
+  </div>
   <% end %>
 
 <% @posts.each do |post| %>
@@ -26,8 +40,11 @@
     <p><%= post.body %></p>
     <div class="btn-group" style="float:right">
       <%= link_to 'Show', post, class: 'btn' %>
+      <% if user_signed_in? %>
       <%= link_to 'Edit', edit_post_path(post), class: 'btn' %>
       <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+      <% else %>
+      <% end %>
     </div>
     <div class="clearfix">
   </div>

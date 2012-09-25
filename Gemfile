@@ -29,6 +29,9 @@ gem 'faker'
 
 gem 'kaminari'
 gem 'paperclip'
+gem 'cancan'
+gem 'devise'
+gem 'rolify'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
